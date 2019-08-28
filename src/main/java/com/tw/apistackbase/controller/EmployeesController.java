@@ -53,6 +53,22 @@ public class EmployeesController {
         optionalEmployee.orElse(null).setGender(e.getGender());
         return ResponseEntity.status(HttpStatus.OK).build();
     }
+
+    //修改
+    @PutMapping(path = "/{id}")
+    public ResponseEntity<Empolyees> updateEmployee(@PathVariable Integer id,@RequestBody Empolyees changeEmployee){
+        for(Empolyees employee3:employees) {
+            if(employee3.getId()==id) {
+                employee3.setId(changeEmployee.getId());
+                employee3.setName(changeEmployee.getName());
+                employee3.setAge(changeEmployee.getAge());
+                employee3.setGender(changeEmployee.getGender());
+                return ResponseEntity.ok(employee3);
+            }
+        }
+        return ResponseEntity.notFound().build();
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity deleteEmployee(@PathVariable String id) {
         for (Empolyees employee : employees) {
