@@ -53,4 +53,14 @@ public class EmployeesController {
         optionalEmployee.orElse(null).setGender(e.getGender());
         return ResponseEntity.status(HttpStatus.OK).build();
     }
+    @DeleteMapping("/{id}")
+    public ResponseEntity deleteEmployee(@PathVariable String id) {
+        for (Empolyees employee : employees) {
+            if (employee.getId() == Integer.parseInt(id)) {
+                employees.remove(employee);
+                break;
+            }
+        }
+        return ResponseEntity.noContent().build();
+    }
 }
