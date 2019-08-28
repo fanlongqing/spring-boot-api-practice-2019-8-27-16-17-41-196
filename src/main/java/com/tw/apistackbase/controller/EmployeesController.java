@@ -43,5 +43,14 @@ public class EmployeesController {
         employees.add(employee);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
-
+    //update一名员工，这个不会，看的别人学习的
+    @PutMapping(consumes = "application/json")
+    public ResponseEntity<Empolyees> updateEmployee(@RequestBody Empolyees e) {
+        Optional<Empolyees> optionalEmployee = employees.stream().filter(employee -> employee.getId() == e.getId())
+                .findAny();
+        optionalEmployee.orElse(null).setName(e.getName());
+        optionalEmployee.orElse(null).setAge(e.getAge());
+        optionalEmployee.orElse(null).setGender(e.getGender());
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
 }
